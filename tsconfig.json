@@ -1,0 +1,44 @@
+{
+  "compilerOptions": {
+    "allowJs": true,
+    "allowSyntheticDefaultImports": true,
+    "declaration": true,
+    "esModuleInterop": true,
+    "importHelpers": true,
+    "isolatedModules": false,
+    "lib": [
+      "DOM",
+      "ESNext"
+    ],
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "noImplicitAny": true,
+    "outDir": "dist",
+    "pretty": true,
+    "removeComments": true,
+    "strict": true,
+    "target": "es2018"
+  },
+  "include": [
+    "src/**/*"
+  ],
+  "exclude": [
+    "src/**/*.test.ts",
+    "src/**/types.ts"
+  ],
+  "types": [],
+  "typedocOptions": {
+    "disableSources": true,
+    "excludeNotExported": true,
+    "excludePrivate": true,
+    "exclude": "**/*+(index|.test).ts",
+    "includeVersion": true,
+    "mode": "modules",
+    "name": "Concourse SDK",
+    "out": "docs",
+    "plugin": [
+      "typedoc-plugin-markdown"
+    ],
+    "readme": "none"
+  }
+}

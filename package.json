@@ -4,6 +4,8 @@
   "description": "Interact with Concourse API from a node application.",
   "main": "index.js",
   "scripts": {
+    "test:integration": "jest --testPathPattern=tests/integration --runInBand",
+    "test:unit": "jest --testPathPattern=tests/unit",
     "test": "jest --coverage"
   },
   "engines": {
@@ -28,5 +30,42 @@
   "bugs": {
     "url": "https://github.com/paroxp/concourse-node-sdk/issues"
   },
-  "homepage": "https://github.com/paroxp/concourse-node-sdk#readme"
+  "homepage": "https://github.com/paroxp/concourse-node-sdk#readme",
+  "devDependencies": {
+    "@types/jest": "^26.0.14",
+    "jest": "^26.5.2",
+    "nock": "^13.0.4",
+    "ts-jest": "^26.4.1",
+    "typescript": "^4.0.3"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "coveragePathIgnorePatterns": [
+      "/node_modules/"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "branches": 100,
+        "functions": 100,
+        "lines": 100,
+        "statements": 100
+      }
+    },
+    "moduleFileExtensions": [
+      "ts",
+      "js",
+      "json"
+    ],
+    "transform": {
+      "^.+\\.(ts)$": "ts-jest"
+    },
+    "globals": {
+      "ts-jest": {
+        "tsConfig": "tsconfig.json"
+      }
+    },
+    "testMatch": [
+      "<rootDir>/src/**/*.test.+(ts|js)"
+    ]
+  }
 }
