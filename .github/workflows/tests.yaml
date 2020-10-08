@@ -1,0 +1,52 @@
+name: Lint, Test and Build
+
+on: push
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [12.x]
+
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        repository: concourse/concourse-docker
+
+    - name: Run Concourse
+      run: |
+        ./keys/generate
+
+        docker-compose up -d
+
+    - uses: actions/checkout@v2
+
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+
+    - name: Install dependencies
+      run: npm ci
+      env:
+        CI: true
+
+    - name: Lint source code
+      run: npm run lint
+      env:
+        CI: true
+
+    - name: Test library
+      run: npm run test
+      env:
+        CI: true
+
+    - name: Build library
+      run: npm run build
+      env:
+        CI: true
+
+    - name: Check if docs are up to date
+      run: git diff --quiet docs/ || echo 'The documentation is not up to date. Run `npm run build` and commit `docs/`.'
