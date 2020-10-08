@@ -4,6 +4,8 @@
   "description": "Interact with Concourse API from a node application.",
   "main": "index.js",
   "scripts": {
+    "lint:ts": "eslint --format codeframe --ext .js,.ts .",
+    "lint": "npm run -s lint:ts",
     "test:integration": "jest --testPathPattern=tests/integration --runInBand",
     "test:unit": "jest --testPathPattern=tests/unit",
     "test": "jest --coverage"
@@ -33,6 +35,12 @@
   "homepage": "https://github.com/paroxp/concourse-node-sdk#readme",
   "devDependencies": {
     "@types/jest": "^26.0.14",
+    "@typescript-eslint/eslint-plugin": "^4.4.0",
+    "@typescript-eslint/parser": "^4.4.0",
+    "eslint": "^7.10.0",
+    "eslint-plugin-editorconfig": "^2.1.3",
+    "eslint-plugin-functional": "^3.0.2",
+    "eslint-plugin-import": "^2.22.1",
     "jest": "^26.5.2",
     "nock": "^13.0.4",
     "ts-jest": "^26.4.1",
