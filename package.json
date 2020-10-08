@@ -1,0 +1,32 @@
+{
+  "name": "concourse",
+  "version": "0.0.1",
+  "description": "Interact with Concourse API from a node application.",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest --coverage"
+  },
+  "engines": {
+    "node": ">=12"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/paroxp/concourse-node-sdk.git"
+  },
+  "keywords": [
+    "concourse",
+    "api",
+    "sdk",
+    "ci",
+    "cd",
+    "pipeline",
+    "team",
+    "users"
+  ],
+  "author": "Rafal Proszowski",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/paroxp/concourse-node-sdk/issues"
+  },
+  "homepage": "https://github.com/paroxp/concourse-node-sdk#readme"
+}
