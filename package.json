@@ -9,8 +9,9 @@
   ],
   "scripts": {
     "build:ts": "tsc",
-    "build": "npm run -s build:ts",
-    "clean": "rm -rf dist",
+    "build:docs": "typedoc",
+    "build": "npm run -s build:ts && npm run -s build:docs",
+    "clean": "rm -rf dist docs",
     "lint:ts": "eslint --format codeframe --ext .js,.ts .",
     "lint": "npm run -s lint:ts",
     "prebuild": "npm run -s clean",
@@ -58,6 +59,8 @@
     "jest": "^26.5.2",
     "nock": "^13.0.4",
     "ts-jest": "^26.4.1",
+    "typedoc": "^0.19.2",
+    "typedoc-plugin-markdown": "^3.0.7",
     "typescript": "^4.0.3"
   },
   "jest": {
