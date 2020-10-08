@@ -2,10 +2,19 @@
   "name": "concourse",
   "version": "0.0.1",
   "description": "Interact with Concourse API from a node application.",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
+  "files": [
+    "dist/**/*"
+  ],
   "scripts": {
+    "build:ts": "tsc",
+    "build": "npm run -s build:ts",
+    "clean": "rm -rf dist",
     "lint:ts": "eslint --format codeframe --ext .js,.ts .",
     "lint": "npm run -s lint:ts",
+    "prebuild": "npm run -s clean",
+    "prepublish": "npm run -s build",
     "test:integration": "jest --testPathPattern=tests/integration --runInBand",
     "test:unit": "jest --testPathPattern=tests/unit",
     "test": "jest --coverage"
@@ -33,8 +42,13 @@
     "url": "https://github.com/paroxp/concourse-node-sdk/issues"
   },
   "homepage": "https://github.com/paroxp/concourse-node-sdk#readme",
+  "dependencies": {
+    "axios": "^0.20.0",
+    "simple-oauth2": "^4.1.0"
+  },
   "devDependencies": {
     "@types/jest": "^26.0.14",
+    "@types/simple-oauth2": "^4.1.0",
     "@typescript-eslint/eslint-plugin": "^4.4.0",
     "@typescript-eslint/parser": "^4.4.0",
     "eslint": "^7.10.0",
