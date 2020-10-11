@@ -1,7 +1,7 @@
 import nock from 'nock';
 
 import { Client } from '../../client';
-import { ClientConfiguration, PipelineConfig } from '../../types';
+import { ClientConfiguration, Config, PipelineConfig } from '../../types';
 
 const config: ClientConfiguration = {
   apiEndpoint: process.env['CONCOURSE_API'] || 'http://localhost:8080',
@@ -33,24 +33,24 @@ const build = {
   team_name,
 };
 
-const pipelineConfig: PipelineConfig = {
-  jobs: [
+const job: Config.Job = {
+  name: job_name,
+  plan: [
+    { get: 'timer-1m', trigger: true },
     {
-      name: job_name,
-      plan: [
-        { get: 'timer-1m', trigger: true },
-        {
-          config: {
-            image_resource: { source: { repository: 'alpine' }, type: 'docker-image' },
-            params: { NAME: 'world' },
-            platform: 'linux',
-            run: { args: [ '-e', '-u', '-c', 'echo "Hello, ${NAME}!"' ], path: 'sh' },
-          },
-          task: 'say-hello',
-        },
-      ],
+      config: {
+        image_resource: { source: { repository: 'alpine' }, type: 'docker-image' },
+        params: { NAME: 'world' },
+        platform: 'linux',
+        run: { args: [ '-e', '-u', '-c', 'echo "Hello, ${NAME}!"' ], path: 'sh' },
+      },
+      task: 'say-hello',
     },
   ],
+};
+
+const pipelineConfig: PipelineConfig = {
+  jobs: [ job ],
   resources: [
     { name: 'timer-1m', source: { interval: '1m' }, type: 'time' },
   ],
@@ -133,7 +133,20 @@ describe(Client, () => {
   });
 
   describe(Client.prototype.setPipelineConfig, () => {
-    it('should successfully make the api call', async () => {
+    it('should successfully create pipeline with config', async () => {
+      const response = await client.setPipelineConfig(pipeline, {
+        ...pipelineConfig,
+        jobs: [
+          job,
+          { ...job, name: 'fault' },
+        ],
+      });
+
+      expect(response).not.toHaveProperty('errors');
+      expect(response).not.toHaveProperty('warnings');
+    });
+
+    it('should successfully update pipeline with config', async () => {
       const response = await client.setPipelineConfig(pipeline, pipelineConfig);
 
       expect(response).not.toHaveProperty('errors');
