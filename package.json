@@ -18,7 +18,7 @@
     "prepublish": "npm run -s build",
     "test:integration": "jest --testPathPattern=tests/integration --runInBand",
     "test:unit": "jest --testPathPattern=tests/unit",
-    "test": "jest --coverage"
+    "test": "jest --coverage --runInBand"
   },
   "engines": {
     "node": ">=12"
@@ -65,6 +65,7 @@
   },
   "jest": {
     "testEnvironment": "node",
+    "testTimeout": 300000,
     "coveragePathIgnorePatterns": [
       "/node_modules/"
     ],
