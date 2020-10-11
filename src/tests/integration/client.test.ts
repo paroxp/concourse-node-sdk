@@ -100,7 +100,18 @@ describe(Client, () => {
   });
 
   describe(Client.prototype.setTeam, () => {
-    it('should successfully make the api call', async () => {
+    it('should successfully create a team', async () => {
+      const response = await client.setTeam({ ...team, auth: { local: { users: [ 'config.username' ] } } });
+
+      expect(response).toHaveProperty('id');
+      expect(response).toHaveProperty('name');
+      expect(response).toHaveProperty('auth');
+      expect(response.auth).toHaveProperty('local');
+      expect(response.auth.local).toHaveProperty('users');
+      expect(response.auth.local.users).not.toContain(config.username);
+    });
+
+    it('should successfully update the team', async () => {
       const response = await client.setTeam(team);
 
       expect(response).toHaveProperty('id');
@@ -114,6 +125,10 @@ describe(Client, () => {
 
       expect(response).toHaveProperty('id');
       expect(response).toHaveProperty('name');
+      expect(response).toHaveProperty('auth');
+      expect(response.auth).toHaveProperty('local');
+      expect(response.auth.local).toHaveProperty('users');
+      expect(response.auth.local.users).toContain(config.username);
     });
   });
 
