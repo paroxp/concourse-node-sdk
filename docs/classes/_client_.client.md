@@ -230,7 +230,7 @@ Obtain pipeline configuration.
 
 **`example`** 
 ```typescript
-const pipelineConfig = await client.getPipelineConfig({ name: 'info', team_name: 'main' });
+const { config, version } = await client.getPipelineConfig({ name: 'info', team_name: 'main' });
 ```
 
 #### Parameters:
