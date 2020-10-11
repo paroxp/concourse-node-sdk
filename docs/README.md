@@ -1,8 +1,8 @@
-**[Concourse SDK - v0.0.1](README.md)**
+**[Concourse SDK - v0.0.2](README.md)**
 
 > Globals
 
-# Concourse SDK - v0.0.1
+# Concourse SDK - v0.0.2
 
 ## Index
 

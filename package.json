@@ -1,6 +1,6 @@
 {
   "name": "concourse",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Interact with Concourse API from a node application.",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",

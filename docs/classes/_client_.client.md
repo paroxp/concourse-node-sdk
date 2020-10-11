@@ -1,4 +1,4 @@
-**[Concourse SDK - v0.0.1](../README.md)**
+**[Concourse SDK - v0.0.2](../README.md)**
 
 > [Globals](../README.md) / ["client"](../modules/_client_.md) / Client
 
