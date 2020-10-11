@@ -147,7 +147,8 @@ describe(Client, () => {
     });
 
     it('should successfully update pipeline with config', async () => {
-      const response = await client.setPipelineConfig(pipeline, pipelineConfig);
+      const { version } = await client.getPipelineConfig(pipeline);
+      const response = await client.setPipelineConfig(pipeline, pipelineConfig, version);
 
       expect(response).not.toHaveProperty('errors');
       expect(response).not.toHaveProperty('warnings');
@@ -167,8 +168,10 @@ describe(Client, () => {
     it('should successfully make the api call', async () => {
       const response = await client.getPipelineConfig(pipeline);
 
-      expect(response).toHaveProperty('jobs');
-      expect(response).toHaveProperty('resources');
+      expect(response).toHaveProperty('config');
+      expect(response.config).toHaveProperty('jobs');
+      expect(response.config).toHaveProperty('resources');
+      expect(response).toHaveProperty('version');
     });
   });
 

@@ -224,7 +224,7 @@ ___
 
 ### getPipelineConfig
 
-▸ **getPipelineConfig**(`__namedParameters`: { name: string ; team_name: string  }): Promise\<[Pipeline](../modules/_types_.md#pipeline)>
+▸ **getPipelineConfig**(`__namedParameters`: { name: string ; team_name: string  }): Promise\<{ config: [PipelineConfig](../modules/_types_.md#pipelineconfig) ; version: string  }>
 
 Obtain pipeline configuration.
 
@@ -239,9 +239,9 @@ Name | Type | Description |
 ------ | ------ | ------ |
 `__namedParameters` | { name: string ; team_name: string  } | An object containing fined team configuration |
 
-**Returns:** Promise\<[Pipeline](../modules/_types_.md#pipeline)>
+**Returns:** Promise\<{ config: [PipelineConfig](../modules/_types_.md#pipelineconfig) ; version: string  }>
 
-Pipeline's configuration
+Pipeline's configuration and config version
 
 ___
 
@@ -316,13 +316,17 @@ ___
 
 ### setPipelineConfig
 
-▸ **setPipelineConfig**(`__namedParameters`: { name: string ; team_name: string  }, `config`: [PipelineConfig](../modules/_types_.md#pipelineconfig)): Promise\<[PipelineConfigFailures](../modules/_types_.md#pipelineconfigfailures)>
+▸ **setPipelineConfig**(`__namedParameters`: { name: string ; team_name: string  }, `config`: [PipelineConfig](../modules/_types_.md#pipelineconfig), `version?`: undefined \| string): Promise\<[PipelineConfigFailures](../modules/_types_.md#pipelineconfigfailures)>
 
 Update specific pipeline's configuration or Create new pipeline with specified configuration.
 
 **`example`** 
 ```typescript
+// create pipeline
 const issues = await client.setPipelineConfig({ name: 'info', team_name: 'main' }, pipelineConfig);
+
+// update pipeline
+const issues = await client.setPipelineConfig({ name: 'info', team_name: 'main' }, pipelineConfig, version);
 ```
 
 #### Parameters:
@@ -330,7 +334,8 @@ const issues = await client.setPipelineConfig({ name: 'info', team_name: 'main' 
 Name | Type | Description |
 ------ | ------ | ------ |
 `__namedParameters` | { name: string ; team_name: string  } | An object containing fined team configuration |
-`config` | [PipelineConfig](../modules/_types_.md#pipelineconfig) | Pipeline's configuration  |
+`config` | [PipelineConfig](../modules/_types_.md#pipelineconfig) | Pipeline's configuration |
+`version?` | undefined \| string | Pipeline's configuration version  |
 
 **Returns:** Promise\<[PipelineConfigFailures](../modules/_types_.md#pipelineconfigfailures)>
 

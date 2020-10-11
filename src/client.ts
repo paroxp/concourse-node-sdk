@@ -17,6 +17,7 @@ import {
 } from './types';
 
 const DEFAULT_TIMEOUT = 30000;
+const CONFIG_VERSION_HEADER = 'X-Concourse-Config-Version';
 
 export class Client {
   /**
@@ -78,18 +79,19 @@ export class Client {
     }
 
     const response = await axios.request<T>({
+      ...opts,
+
       baseURL: this.apiEndpoint,
       headers: {
+        ...opts?.headers,
+
         Authorization: `Bearer ${this.token}`,
-        'Content-Type': 'application/json',
       },
       method,
       proxy: this.proxy,
       timeout: DEFAULT_TIMEOUT,
       url,
       validateStatus: (status: number) => status > 0 && status <= 400,
-
-      ...opts,
     });
 
     return response;
@@ -228,20 +230,23 @@ export class Client {
    * @param name Pipeline's name
    * @param team_name Team's name
    *
-   * @returns Pipeline's configuration
+   * @returns Pipeline's configuration and config version
    *
    * @example
    * ```typescript
    * const pipelineConfig = await client.getPipelineConfig({ name: 'info', team_name: 'main' });
    * ```
    */
-  async getPipelineConfig({ name, team_name }: { name: string, team_name: string }): Promise<Pipeline>;
-  async getPipelineConfig({ name, team_name }: Pipeline): Promise<Pipeline> {
+  async getPipelineConfig({ name, team_name }: {
+    name: string,
+    team_name: string
+  }): Promise<{ config: PipelineConfig, version: string }>;
+  async getPipelineConfig({ name, team_name }: Pipeline): Promise<{ config: PipelineConfig, version: string }> {
     const response = await this.request<{
-      readonly config: Pipeline;
+      readonly config: PipelineConfig;
     }>('get', `/api/v1/teams/${team_name}/pipelines/${name}/config`);
 
-    return response.data.config;
+    return { ...response.data, version: response.headers[CONFIG_VERSION_HEADER.toLowerCase()] };
   }
 
   /**
@@ -251,12 +256,17 @@ export class Client {
    * @param name Pipeline's name
    * @param team_name Team's name
    * @param config Pipeline's configuration
+   * @param version Pipeline's configuration version
    *
    * @returns Possible warnings or errors with pipeline configuration
    *
    * @example
    * ```typescript
+   * // create pipeline
    * const issues = await client.setPipelineConfig({ name: 'info', team_name: 'main' }, pipelineConfig);
+   *
+   * // update pipeline
+   * const issues = await client.setPipelineConfig({ name: 'info', team_name: 'main' }, pipelineConfig, version);
    * ```
    */
   async setPipelineConfig(
@@ -264,12 +274,23 @@ export class Client {
       name: string, team_name: string,
     },
     config: PipelineConfig,
+    version?: string,
   ): Promise<PipelineConfigFailures>;
-  async setPipelineConfig({ name, team_name }: Pipeline, config: PipelineConfig): Promise<PipelineConfigFailures> {
+  async setPipelineConfig(
+    { name, team_name }: Pipeline,
+    config: PipelineConfig,
+    version = '0',
+  ): Promise<PipelineConfigFailures> {
     const response = await this.request<PipelineConfigFailures>(
       'put',
       `/api/v1/teams/${team_name}/pipelines/${name}/config`,
-      { data: config });
+      {
+        data: config,
+        headers: {
+          [CONFIG_VERSION_HEADER]: version,
+          'Content-Type': 'application/json',
+        },
+      });
 
     return response.data;
   }
