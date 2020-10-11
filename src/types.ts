@@ -1,9 +1,21 @@
 import { AxiosProxyConfig } from 'axios';
 
 export type ClientConfiguration = {
+  /**
+   * Concourse's API URL for making the calls with the API.
+   */
   readonly apiEndpoint: string;
+  /**
+   * Password used to authenticate with Concourse.
+   */
   readonly password: string;
+  /**
+   * Proxy configuration for the client to interact through with the API.
+   */
   readonly proxy?: ProxyConfiguration;
+  /**
+   * Username used to authenticate with Concourse.
+   */
   readonly username: string;
 };
 

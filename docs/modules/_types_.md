@@ -58,12 +58,12 @@ ___
 
 #### Type declaration:
 
-Name | Type |
------- | ------ |
-`apiEndpoint` | string |
-`password` | string |
-`proxy?` | [ProxyConfiguration](_types_.md#proxyconfiguration) |
-`username` | string |
+Name | Type | Description |
+------ | ------ | ------ |
+`apiEndpoint` | string | Concourse's API URL for making the calls with the API. |
+`password` | string | Password used to authenticate with Concourse. |
+`proxy?` | [ProxyConfiguration](_types_.md#proxyconfiguration) | Proxy configuration for the client to interact through with the API. |
+`username` | string | Username used to authenticate with Concourse. |
 
 ___
 
