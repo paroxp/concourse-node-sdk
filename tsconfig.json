@@ -26,19 +26,5 @@
     "src/**/*.test.ts",
     "src/**/types.ts"
   ],
-  "types": [],
-  "typedocOptions": {
-    "disableSources": true,
-    "excludeNotExported": true,
-    "excludePrivate": true,
-    "exclude": "**/*+(index|.test).ts",
-    "includeVersion": true,
-    "mode": "modules",
-    "name": "Concourse SDK",
-    "out": "docs",
-    "plugin": [
-      "typedoc-plugin-markdown"
-    ],
-    "readme": "none"
-  }
+  "types": []
 }
