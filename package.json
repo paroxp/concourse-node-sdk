@@ -43,7 +43,7 @@
   },
   "homepage": "https://github.com/paroxp/concourse-node-sdk#readme",
   "dependencies": {
-    "axios": "^0.20.0",
+    "axios": "^0.21.1",
     "simple-oauth2": "^4.1.0"
   },
   "devDependencies": {
