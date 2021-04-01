@@ -47,6 +47,3 @@ jobs:
       run: npm run build
       env:
         CI: true
-
-    - name: Check if docs are up to date
-      run: git diff --quiet docs/ || echo 'The documentation is not up to date. Run `npm run build` and commit `docs/`.'

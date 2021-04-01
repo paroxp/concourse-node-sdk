@@ -23,10 +23,6 @@ exposing them to Concourse interface.
 
 Think: GitHub Actions, DigitalOcean App Deployments, Heroku Deployments.
 
-## Documentation
-
-Find the `docs/` directory which is generated from source code.
-
 ## Testing
 
 Majority of the tests are written as integration tests, and there is very little unit tests as it stands.
