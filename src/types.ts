@@ -96,55 +96,55 @@ export type TeamAuthConfiguration = {
 
 type BuildStatus = 'started' | 'pending' | 'succeeded' | 'failed' | 'errored' | 'aborted';
 
-  export type Token = {
-    readonly access_token: string;
-  };
+export type Token = {
+  readonly access_token: string;
+};
 
-  export type Info = {
-    readonly external_url: string;
-    readonly version: string;
-    readonly worker_version: string;
-  };
+export type Info = {
+  readonly external_url: string;
+  readonly version: string;
+  readonly worker_version: string;
+};
 
-  export type Team = {
-    readonly auth: TeamAuthConfiguration;
-    readonly id: number;
-    readonly name: string;
-  };
+export type Team = {
+  readonly auth: TeamAuthConfiguration;
+  readonly id: number;
+  readonly name: string;
+};
 
-  export type Pipeline = {
-    readonly id: number;
-    readonly name: string;
-    readonly paused: boolean;
-    readonly public: boolean;
-    readonly archived: boolean;
-    readonly team_name: string;
-    readonly last_updated: number;
-  };
+export type Pipeline = {
+  readonly id: number;
+  readonly name: string;
+  readonly paused: boolean;
+  readonly public: boolean;
+  readonly archived: boolean;
+  readonly team_name: string;
+  readonly last_updated: number;
+};
 
-  export type PipelineConfig = {
-    readonly jobs: readonly Config.Job[];
-    readonly resources: readonly Config.Resource[];
-  };
+export type PipelineConfig = {
+  readonly jobs: readonly Config.Job[];
+  readonly resources: readonly Config.Resource[];
+};
 
-  export type PipelineConfigFailures = {
-    readonly errors?: readonly string[];
-    readonly warnings?: readonly {
-      readonly message: string;
-      readonly type: string;
-    }[];
-  };
+export type PipelineConfigFailures = {
+  readonly errors?: readonly string[];
+  readonly warnings?: readonly {
+    readonly message: string;
+    readonly type: string;
+  }[];
+};
 
-  export type Build = {
-    readonly api_url: string;
-    readonly end_time: number;
-    readonly id: number;
-    readonly job_name?: string;
-    readonly name: string;
-    readonly pipeline_name: string;
-    readonly start_time: number;
-    readonly status: BuildStatus;
-    readonly team_name: string;
-  };
+export type Build = {
+  readonly api_url: string;
+  readonly end_time: number;
+  readonly id: number;
+  readonly job_name?: string;
+  readonly name: string;
+  readonly pipeline_name: string;
+  readonly start_time: number;
+  readonly status: BuildStatus;
+  readonly team_name: string;
+};
 
-  export type Builds = readonly Build[];
+export type Builds = readonly Build[];
